@@ -3,19 +3,12 @@ import torch
 import torchvision
 import torchvision.transforms as transforms  
 from torch.utils.data.dataset import Subset
-
-
 import matplotlib.pyplot as plt
 import numpy as np
-
-
-
 import torch.nn as nn
 import torch.nn.functional as F
-
 import torch.optim as optim
 from torch.autograd import Variable
-
 import sys
 
 def config(batch_size): 
