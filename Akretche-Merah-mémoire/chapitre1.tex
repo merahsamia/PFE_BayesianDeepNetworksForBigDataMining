@@ -1,0 +1,228 @@
+\chapter{\sc L'analyse du big data}
+\label{chap:generalites}
+\section{Introduction}
+Il sera question dans ce chapitre de définir le concept d'analyse du big data ainsi que les approches du data mining d'analyse utilisées. Nous commençons par l'apprentissage automatique et ses différentes méthodes. Nous mettons en exergue le Deep Learning avec les réseaux de neurones et plus précisément les réseaux convolutifs (CNN) que nous utilisons dans ce travail. Nous citons par la suite quelques limites de ces approches en introduisant le rôle des réseaux bayésiens.
+\section{Data mining (Fouille de données)}
+Le volume des données circulant sur le Web, ou stockées par les entreprises est en croissance continue. Afin de pouvoir exploiter cette richesse, il est nécessaire d'extraire des connaissances à partir de très grands volumes d'informations.\\[0.5\baselineskip]
+La nature de l'analyse de très grands volumes de données dépend de la nature et de la structure des Big Data, que l'on appelle aussi « analytique », traduction du terme anglo-saxon « analytics ». Ces différentes analyses mettront en \oe{}uvre divers algorithmes relevant de la fouille de données (Data Mining) \cite{ref04}.\\[0.5\baselineskip]
+\newpage
+\subsection{Définition}
+Le data mining ou fouille de données est l'ensemble des méthodes scientifiques destinées à l'exploration et l'analyse de grandes quantités de données informatiques en vue de détecter des profils-type, des comportements récurrents, des règles, des liens, des tendances inconnues, des structures particulières restituant de façon concise l'essentiel de l'information utile pour l'aide à la décision \cite{ref05}.\\[0.5\baselineskip]
+Le data mining permet l'extraction des données selon plusieurs algorithmes. Ces algorithmes couvrent:
+\begin{itemize}
+	\item La classification, est une méthode qui permet de regrouper des objets (personnes, intérêt...) en groupes, ou familles de sorte que les objets d'un même groupe se ressemblent le plus possible, et ceux de groupes distincts diffèrent le plus possible.
+	\item Le clustering, regroupement automatique d'individus au sein d'un certain         nombre de classes à priori inconnues. 
+	\item La régression qui est une estimation automatique d'une fonction mathématique permettant de faire correspondre des entrées, par exemple des vecteurs décrivant des individus et des sorties, ou encore des classes ou des valeurs numériques. 
+	\item L'analyse d'association, entre individus ou entre variables. 
+	\item L'analyse de réseaux, ou graphes \cite{ref03}.  
+\end{itemize}
+\section{Machine Learning (Apprentissage automatique)}
+Le Machine Learning est une branche de l'Intelligence Artificielle qui permet à une machine d'analyser un système, de comprendre pas à pas son fonctionnement et comme résultat d'effectuer ou simuler  différentes tâches de ce système. L'algorithme d'apprentissage a pour objectif d'apprendre le fonctionnement du système étudié de manière active. Il connait les entrées possibles du système et compose des séquences qu'il soumet au système (requêtes) pour observer ses réponses (séquences autorisée/refusée, valeurs renvoyées, etc.)  \cite{ref06}.\\[0.5\baselineskip]
+ D'autre part, nous pouvons définir le terme Machine Learning comme un ensemble d'algorithmes qui permettent d'apprendre le fonctionnement d'un système en observant régulièrement les tâches qu'il réalise, puis prédire son comportement et ses décisions.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre1/figure_01}
+	\caption[Modèle d'apprentissage vu comme une boîte noire]{Modèle d'apprentissage vu comme une boîte noire}
+	\label{fig:figure_01}
+\end{figure}
+\subsection{Méthodes et mécanismes du Machine Learning}
+Les méthodes d'apprentissage automatique s'organisent en trois types :             méthodes supervisées, semi-supervisées, et non supervisées.
+\begin{itemize}
+	\item L'apprentissage supervisé est traditionnellement synonyme de la classification. La supervision dans l'apprentissage vient du fait que les observations de la base d'apprentissage sont étiquetées.
+	\item L'apprentissage non supervisé est essentiellement synonyme de clustering. Le processus d'apprentissage est non supervisé puisque les observations d'entrée ne sont pas étiquetées.
+	\item L'apprentissage semi-supervisé est une classe de techniques qui font usage des deux types d'observations, étiquetées et non étiquetées, lors de l'apprentissage d'un modèle \cite{ref03}.  
+\end{itemize}
+\section{Réseaux de neurones (NN)}
+Initialement conçus dans le but de modéliser mathématiquement le traitement de l'information des neurones biologiques du cortex humain, leur rapprochement aujourd'hui n'importe plus autant et c'est leur efficacité à construire des modèles très complexes et non linéaires qui fait leur succès. Les réseaux de neurones (ou en anglais Neural Networks) sont des systèmes composés de processeurs élémentaires appelés neurones artificiels, généralement répartis en plusieurs couches interconnectées et fonctionnant en parallèle. Chaque neurone reçoit en entrée des signaux plus ou moins forts (les activations) provenant d'autres neurones, et en fonction de ces activations et de l'importance (le poids) qu'il donne à chacun d'eux, il émet à son tour un signal (s'activer) ou pas \cite{ref07}.
+\subsection{Le neurone formel}
+Un neurone formel (ou artificiel), introduit par McCulloch et Walter Pitts en 1943 \cite{ref08}, est une modélisation mathématique d'un neurone biologique. Il consiste en une fonction mathématique à appliquer à un signal et renvoyant une valeur d'activation.
+ 
+\subsection{Le perceptron}
+Franck Rosenblatt introduit en 1958 un algorithme d'apprentissage automatique basé sur le neurone formel appelé le perceptron  \cite{ref09}.\\[0.5\baselineskip]
+Le perceptron est formé d'une première couche d'unités (ou neurones) qui permettent de « lire » les données : chaque unité correspond à une des variables d'entrée. On peut rajouter une unité de biais qui est toujours activée (elle transmet 1 quelles que soient les données). Ces unités sont reliées à une seule et unique unité de sortie, qui reçoit la somme des unités qui lui sont reliées, pondérée par des poids de connexion. Pour p variables $ x_1, x_2, ..., x_P $, la sortie reçoit donc $ w_0 + \sum_{j=1}^p w_jx_j $.\\[0.5\baselineskip]
+L'unité de sortie applique alors une fonction d'activation à cette sortie.\\[0.5\baselineskip]
+Un perceptron prédit donc grâce à une fonction de décision f définie par: 
+\begin{eqnarray}
+f(x)=a (w_0 + \sum_{j=1}^p w_jx_j) 
+\end{eqnarray}
+\cite{ref10}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre1/figure_02}
+	\caption[(a) un NN organisé en 4 couches, (b) le mécanisme d'activation d'un neurone \cite{web01}]{(a) un NN organisé en 4 couches, (b) le mécanisme d'activation d'un neurone \cite{web01} }
+	\label{fig:figure_02}
+\end{figure}
+\subsection{Le perceptron multi-couches}
+Comme son nom l'indique le perceptron multi-couches (ou Multilayer Perceptron, souvent abrégé « MLP », en anglais) est un réseau formé de plusieurs couches intermédiaires. Il consiste en un empilement de plusieurs neurones artificiels formant une couche cachée. Chaque caractéristique d'entrée est connectée à chaque neurone artificiel de la couche suivante. De même, les neurones artificiels de la couche cachée sont tous connectés aux neurones de couche de sortie \cite{web02}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre1/figure_03}
+	\caption[Un exemple de perceptron-multicouches constitué de k couches \cite{web03}]{Un exemple de perceptron-multicouches constitué de k couches \cite{web03}}
+	\label{fig:figure_03}
+\end{figure}
+\section{Deep Learning}
+\subsection{Définition}
+ Deep Learning ou apprentissage profond, est une branche du Machine Learning particulièrement adaptée à l'apprentissage de données complexes en vue de réaliser des modèles avancés supervisés ou non supervisés  \cite{ref11}.\\[0.5\baselineskip]
+Le perceptron multi-couches est l'exemple par excellence d'un modèle d'apprentissage profond. Habituellement, un réseau de neurones est considéré comme profond, s'il est composé d'au moins quatre couches (c'est-à-dire trois couches cachées + une couche de sortie) \cite{web02}.\\[0.5\baselineskip]
+Celles-ci permettent de décomposer de manière hiérarchique le contenu d'une donnée complexe comme de la voix ou une image pour la classifier ensuite : identifier des mots pour la voix ou associer des tags descriptifs à des images.  Le Deep Learning sert le plus souvent à reconnaître le langage, l'écriture et les images mais il peut aussi avoir d'autres usages dans les outils d'aide à la décision  \cite{ref12}.\\[0.5\baselineskip]
+\subsection{Rétropropagation}
+La rétropropagation du gradient de l'erreur (ou backpropagation) est un algorithme d'optimisation permettant d'ajuster les paramètres d'un réseau de neurones multicouches pour mettre en correspondance des entrées et des sorties référencées dans une base d'apprentissage.\\[0.5\baselineskip]
+Pour pouvoir entraîner ces systèmes, il faut savoir comment ajuster les paramètres de chaque couche de neurones. Pour chaque exemple de données (groupe d'observations de l'ensemble d'apprentissage), l'entrée est donnée au modèle afin d'obtenir la sortie, celle-ci est comparée avec le résultat attendu pour calculer l'erreur, La rétropropagation permet de calculer le gradient de l'erreur pour chaque neurone, de la dernière couche vers la première (rétropropagation). Cela permet de corriger les erreurs selon l'importance des éléments qui ont justement participé à la réalisation de ces erreurs. Ainsi, les poids qui contribuent à engendrer une erreur importante se verront modifiés de manière plus significative que les poids qui ont engendré une erreur marginale \cite{web04}.\\[0.5\baselineskip]
+La dérivée par rapport à chaque coefficient $w$ est calculée en utilisant la règle de la chaîne ou chain rule (voir figure \ref{fig:figure_04}.). Chaque coefficient est mis à jour comme suit:
+\begin{eqnarray}
+	w  \leftarrow  w - a \frac{\partial L(x,y)}{\partial w}
+\end{eqnarray}
+avec $L$ l'erreur, $w$ le coefficient, $x$ l'entrée, $y$ la sortie et $a$ le taux d'apprentissage.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{./image_chapitre1/figure_04}
+	\caption[Règle de la chaîne]{Règle de la chaîne}
+	\label{fig:figure_04}
+\end{figure}
+\textbf{Actualisation des coefficients:} Dans un réseau de neurones, les coefficients sont actualisés comme suit:
+\begin{itemize}
+	\item Étape 1 : Prendre un groupe d'observations appartenant aux données d'entrainement
+	\item Étape 2 : Réaliser la propagation avant pour obtenir le loss (valeur de la fonction de perte)  correspondant.
+	\item Étape 3 : Effectuer une rétropropagation du loss pour obtenir les gradients.
+	\item Étape 4 : Utiliser les gradients pour actualiser les coefficients du réseau
+\end{itemize}
+\subsection{Sur-apprentissage}
+Un réseau de neurones apprend grâce à des exemples (jeux d'entraînements) qui lui sont soumis. Le but de cet apprentissage est de permettre au réseau de tirer de ces exemples des généralisations et de pouvoir les appliquer à de nouvelles données par la suite.\\[0.5\baselineskip]
+On parle de sur-apprentissage (le terme anglais est overfitting) quand un modèle a trop appris les particularités de chacun des exemples fournis en exemple. Il présente alors un taux de succès très important sur les données d'entraînement (pouvant atteindre jusqu'à 100\textdiscount, au détriment de ses performances générales réelles, et sur de nouvelles données qu'il n'a pas encore vu, sa prédiction sera totalement biaisée \cite{web05}. 
+\subsection{Les différentes architectures du Deep Learning}
+Bien qu'il existe un grand nombre de variantes d'architectures pour l'apprentissage profond, il n'est pas toujours possible de comparer les performances de toutes les architectures, car elles ne sont pas toutes évaluées sur les mêmes ensembles de données. Le Deep Learning est un domaine à croissance rapide, et de nouvelles architectures, variantes ou algorithmes apparaissent toutes les semaines.
+\section{Les réseaux de neurones convolutifs}
+      Les réseaux de neurones convolutifs sont un type particulier de réseau de neurones. Désignés par l'acronyme CNN, de l'anglais Convolutional Neural Network. Le nom de ces réseaux vient du fait que leur fonctionnement est basé sur l'utilisation d'une opération mathématique linéaire appelée convolution \cite{ref13}. \\[0.5\baselineskip]
+Chaque couche - dite de convolution - balaye l'ensemble de la couche précédente en appliquant à chaque petite région un même traitement local. Dans le cas d'un texte, les régions sont les n-grammes de la phrase. Pour une image, ils comportent deux parties bien distinctes, en entrée, une image est fournie sous la forme d'une matrice de pixels. Elle a 2 dimensions pour une image en niveaux de gris. La couleur est représentée par une troisième dimension, de profondeur 3 pour représenter les couleurs fondamentales [Rouge, Vert, Bleu].
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre1/figure_05}
+	\caption[Architecture standard d'un réseau de neurone convolutif \cite{web06}]{Architecture standard d'un réseau de neurone convolutif \cite{web06}}
+	\label{fig:figure_05}
+\end{figure}
+\subsection{L'opération de convolution}
+Les réseaux de neurones classiques ne s'adaptent pas parfaitement aux images complètes. Par exemple, certaines bases de données (comme CIFAR-10) ont des images de taille 32 x 32 x 3 (32 pixels de largeur, 32 de hauteur, 3 canaux de couleurs), de sorte qu'un seul neurone entièrement connecté dans une première couche cachée d'un réseau de neurones ordinaire aurait 32 * 32 * 3 = 3072 poids. Si cette quantité semble toujours gérable dans ce cas de figure, il est clair que cette structure entièrement connectée ne s'adapte pas aux images plus grandes. En effet, avec une image de taille plus commune, par exemple 200 x 200 x 3, ceci conduirait à avoir des neurones avec 200 * 200 * 3 = 120 000 poids. Avec plus de neurones, ces paramètres s'additionneraient très rapidement. Cette connectivité totale prend beaucoup de temps et le nombre considérable de paramètres conduirait sans doute à un surapprentissage \cite{ref14}.
+\subsection{Architecture CNN}
+Une architecture CNN est formée par un empilement de couches de traitement indépendantes:
+\begin{itemize}
+	\item La couche de convolution (CONV) est la  la composante clé d'un réseau de neurones convolutif. Elle effectue la majeure partie des lourdes tâches de calcul. La couche de convolution reçoit en entrée plusieurs images, et calcule la convolution de chacune d'entre elles avec chaque filtre. Les filtres correspondent aux caractéristiques (features) que l'on souhaite retrouver dans les images. La sortie résultante est appelée carte de caractéristiques (en anglais activation map ou feature map), et nous indique où se situent ces features. Une couche convolutive est constituée de plusieurs filtres (ou noyaux) de convolution à appliquer sur une matrice d'entrée (une image ou une feature map précédente). Les noyaux des filtres désignent les poids de la couche de convolution. Ils sont initialisés puis mis à jour par \textbf{la descente du gradient} \cite{ref15}.\\
+	La convolution peut être ajustée selon certains paramètres, dont le nombre et la taille de filtres, le stride et le padding .Le stride est un paramètre indiquant de combien de pas on se déplace entre deux calculs de la convolution, et le padding indique combien de rangées de 0 on ajoute autour de l'entrée (Cette marge permet de contrôler la dimension spatiale du volume de sortie).
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{./image_chapitre1/figure_06}
+		\caption[Opération de convolution En rouge : image en input. En bleu : le filtre de convolution. En violet : résultat de l'application du filtre sur la partie de l'image sélectionnée \cite{web07}]{Opération de convolution En rouge : image en input. En bleu : le filtre de convolution. En violet : résultat de l'application du filtre sur la partie de l'image sélectionnée \cite{web07}}
+		\label{fig:figure_06}
+	\end{figure}
+
+\item La couche d'activation : Il est possible d'améliorer l'efficacité du traitement en intercalant entre les couches de traitement une couche qui va opérer une fonction mathématique (fonction d'activation) sur les signaux de sortie.\\
+La fonction d'activation d'unité linéaire rectifiée ou couche ReLU pour Rectified Linear Unit Layer est certainement la plus utilisée dans les CNN. C'est une couche dite de correction qui force les neurones à retourner des valeurs positives \cite{ref16}.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre1/figure_07}
+	\caption[Types de fonctions d'activation \cite{web07}]{Types de fonctions d'activation \cite{web07}}
+	\label{fig:figure_07}
+\end{figure}
+
+\item La couche de pooling (POOL), qui permet de compresser l'information en réduisant la taille de l'entrée intermédiaire (souvent par sous-échantillonnage), réduisant ainsi la quantité de paramètres et de calcul dans le réseau. Il est fréquent de trouver dans les architectures de CNN des couches POOL insérées périodiquement entre deux couches convolutives successives. 
+Il existe plusieurs types de pooling, les plus populaires sont le max-pooling et l'average-pooling.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{./image_chapitre1/figure_08}
+	\caption[Pooling avec un filtre 2x2 et un pas de 2]{Pooling avec un filtre 2x2 et un pas de 2 \cite{ref17}}
+	\label{fig:figure_08}
+\end{figure}
+\item 	La couche "entièrement connectée" (en anglais fully connected layer) (FC) s'applique sur une entrée préalablement aplatie où chaque entrée est connectée à tous les neurones. Les couches de fully connected sont typiquement présentes à la fin des architectures de CNN et peuvent être utilisées pour optimiser des objectifs tels que les scores de classe.
+\newpage
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{./image_chapitre1/figure_09}
+	\caption[Exemple de couche fully connected CNN \cite{web07}]{Exemple de couche fully connected CNN \cite{web07}}
+	\label{fig:figure_09}
+\end{figure}
+\textbf{La mise à plat (Flattening)}\\[0.5\baselineskip]
+Il consiste simplement à mettre à bout toutes les entrées que nous avons pour en faire un (long) vecteur. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{./image_chapitre1/figure_10}
+	\caption[Mise à plat des images \cite{web08}]{Mise à plat des images \cite{web08}}
+	\label{fig:figure_10}
+\end{figure}
+\item La couche de perte (LOSS) spécifie comment l'entrainement du réseau pénalise l'écart entre le signal prévu et réel. Elle est normalement la dernière couche dans le réseau. Diverses fonctions de perte adaptées à différentes tâches peuvent y être utilisées. La fonction « Softmax » généralement utilisée pour l'optimisation de réseau de classification d'images, elle permet de calculer la distribution de probabilités sur les classes de sortie.
+\end{itemize}
+
+\section{L'analyse des données du big data}
+A la lumière du volume important de données du big data il est nécessaire d'utiliser des moyens d'analyse différents des méthodes d'analyse traditionnelles.\\[0.5\baselineskip]
+Tout d'abord l'utilisation de l'Intelligence Artificielle ou IA qui peut se définir comme une discipline scientifique relative au traitement des connaissances et au raisonnement, dans le but de permettre à une machine d'exécuter des fonctions normalement associées à l'intelligence humaine : compréhension, raisonnement, dialogue, adaptation, apprentissage, etc. Les programmes d'IA apprennent à partir des données afin de répondre intelligemment aux nouvelles données et ainsi fournir des résultats correspondants.\\[0.5\baselineskip]
+Un des moyens d'application de l'IA est l'apprentissage automatique et l'apprentissage profond. Grâce à l'apprentissage automatique, les ordinateurs apprennent sans être explicitement programmés. Lorsque nous achetons en ligne, l'apprentissage automatique permet de recommander d'autres produits qui pourraient nous intéresser en fonction des produits que nous avons déjà achetés. Lorsque nous utilisons notre carte de crédit, l'apprentissage automatique compare la transaction à une base de données de transactions telles que la zone géographique habituelle de transactions et ainsi permet la détection des fraudes. Lorsque notre voiture nous indique la durée d'un trajet jusqu'à notre domicile, l'apprentissage automatique permet de déterminer où se trouve notre domicile. L'apprentissage automatique est un sous domaine de l'intelligence artificielle. Le Deep Learning est lui-même une sous-catégorie de l'apprentissage automatique. L'exemple d'application le plus commun est la reconnaissance visuelle. Par exemple, un algorithme va être programmé pour détecter certains visages depuis les images en provenance d'une caméra. Suivant la base de données attribuée, il pourra repérer un individu recherché dans une foule, détecter le taux de satisfaction à la sortie d'un magasin en détectant les sourires, etc. Un ensemble d'algorithmes pourra également reconnaître la voix, le ton, l'expression d'un questionnement, d'une affirmation ainsi que les mots d'une conversation.\\[0.5\baselineskip]
+Pour résumer, le volume de données composant le big data peut être considéré comme difficilement exploitable sans un support informatique. L'IA est donc l'intelligence qui permet une exploitation efficace du big data, et l'apprentissage automatique et  profond font partie des techniques qui facilitent l'analyse du big data \cite{web09}.
+\section{Limites du machine learning dans le Big Data}
+Les algorithmes de machine Learning ne sont pas non plus une boite noire magique qui permet de tout deviner et qui s'adapte à tout. Si l'on souhaite faire des prédictions de bonne qualité, il y a certaines choses à prendre en compte.\\[0.5\baselineskip]
+Tout d'abord, il est nécessaire que les résultats que l'on souhaite prédire soient différentiables. Les algorithmes ne jouent que 20\% dans la qualité des prédictions, les 80\% autres sont dus à la qualité des données. \\[0.5\baselineskip]
+Dans le monde réel, les choses sont bien plus complexes, on peut avoir des imprécisions sur les caractéristiques, des erreurs dans la classification des données ou beaucoup d'autres facteurs qui rendent les prédictions moins évidentes. Une autre limite du Machine Learning est que les algorithmes sont incapables d'extrapoler les grands volumes de données de manière fiable. Il est donc nécessaire de faire des prédictions uniquement sur le même domaine de données que celui utilisé pour l'apprentissage. Les algorithmes de machine Learning ne permettent donc pas d'apprendre de nouvelles choses mais seulement d'automatiser des choses connues ou de mettre en évidence des relations. Dans ce contexte, il est essentiel que les méthodes d'apprentissage puissent suivre le rythme des données, non seulement en termes de volume, mais aussi de la vitesse à laquelle elles sont générées et traitées, afin d'être utiles.\\[0.5\baselineskip]
+Les méthodes classiques de machine learning ont été récemment adaptées aux propriétés du Big Data en appliquant la philosophie Deep learning. Cette dernière vise à produire des représentations abstraites des caractéristiques observées, qui sont organisés en couches; plus la couche est élevée, plus le niveau d'abstraction est élevé. Bien que le Deep Learning ait été appliqué dans une panoplie de domaines et ait donné des résultats appréciables, il a certains inconvénients. En fait,  les couches superposées cachées sont considérées comme une boîte noire dont la taille et les paramètres sont définis empiriquement. De plus, la signification de chaque variable latente (cachée/non observée), dans une couche cachée, est perdue et l'interprétabilité de la représentation des caractéristiques abstraites est pratiquement impossible \cite{ref18}.\\[0.5\baselineskip]
+Construire des modèles d'apprentissage automatique à partir de grandes masses de données (Big Data) nécessite le développement de nouveaux types d'algorithmes. La plupart des algorithmes d'apprentissage automatique ne passent pas à l'échelle \cite{ref12}, elles ne sont pas suffisamment performantes pour exploiter pleinement la valeur du Big Data, sa variabilité et sa véracité rendent le processus de machine learning perplexe. Le volume de données est trop large pour des analyses complètes, et les corrélations et relations entre ces données sont trop importantes pour que les analystes puissent tester toutes les hypothèses afin de dégager une valeur de ces données. Les outils d'apprentissage profond ont acquis une attention considérable dans l'apprentissage machine appliqué. Toutefois, ces outils ne tiennent pas compte de l'incertitude du modèle, c'est là où les réseaux bayésiens semblent idéaux pour exploiter les opportunités cachées du Big Data.
+\section{Les réseaux bayésiens}
+\subsection{C'est quoi un réseau bayésien ?}
+On peut définir un réseau bayésien par un modèle graphique regroupant au sein d'un même formalisme la théorie des graphes et celle des probabilités afin de fournir des outils efficaces autant qu'intuitifs pour représenter une distribution de probabilités jointe sur un ensemble de variables aléatoires. Ce formalisme très puissant permet une représentation intuitive de la connaissance sur un domaine d'application donné et facilite la mise en place de modèles performants et clairs. La représentation de la connaissance se base sur la description, par des graphes, des relations de causalité existant entre des variables décrivant le domaine d'étude. A chaque variable est associée une distribution de probabilités locale quantifiant la relation causale \cite{ref19}.
+\subsection{Pourquoi les réseaux bayésiens ?}
+Une des grandes problématiques de notre époque est de traiter la grande quantité des données qui est mise à notre disposition (notamment grâce à l'informatique) pour en extraire de l'information. Il serait donc intéressant d'avoir un (ou plusieurs) modèle(s) effectuant le lien entre les observations et la réalité pour un objectif précis, et cela, même lorsque les observations sont incomplètes et/ou imprécises.\\[0.5\baselineskip]
+Imaginons un statisticien qui veut analyser un tableau de mesures pour une population donnée. Il se retrouve face à une immense masse d'informations de laquelle il doit extraire de la connaissance ! Il va donc essayer de retrouver les relations pertinentes entre des variables ou des groupes de variables. L'utilisation des réseaux bayésiens va lui permettre d'obtenir une représentation compacte de ces ensembles de dépendances grâce à la notion de probabilités conditionnelles, à partir de laquelle il lui sera plus simple de raisonner.\\[0.5\baselineskip]
+Les réseaux bayésiens permettent donc de transformer en modèle interprétable la connaissance contenue dans des données.\\[0.5\baselineskip]
+Les réseaux probabilistes sont également une représentation du savoir incertain plus flexible que les systèmes à base de règles. Par exemple, en médecine, une même combinaison de symptômes peut être observée pour différentes maladies.\\[0.5\baselineskip]
+Prenons l'exemple du corps humain, système complexe à volonté. Lorsqu'un individu est malade, nous allons observer pour celui-ci un certain nombre de grandeurs (tension, fièvre, etc). En fonction de ces différentes observations et de sa connaissance a priori le médecin va donner son diagnostic. Ce diagnostic est ici évalué en fonction d'un nombre restreint de paramètres, or il se peut que deux individus aient la même forme (les mêmes valeurs pour toutes les grandeurs observées) et que l'un d'eux soit malade, tandis que l'autre est sain.\\[0.5\baselineskip]
+Les modèles probabilistes ont cet avantage de fournir systématiquement une probabilité à chaque état (ici sain ou malade). Celle-ci peut alors être considérée comme un indice de confiance dans le résultat (par exemple, cet individu a 85\% de chance d'être malade). Bien sûr un tel diagnostic n'est pas satisfaisant d'un point de vue éthique pour décider d'administrer ou non un traitement.\\[0.5\baselineskip]
+Pour résumer:
+\begin{itemize}
+	\item L'aspect graphique des modèles bayésiens permet de représenter les relations      entre les attributs clairement et intuitivement.
+	\item Leurs orientations (si elles existent) peuvent représenter des relations de cause à effet.
+	\item Les modèles probabilistes sont capables de gérer l'incertain et l'imprécis \cite{ref20}.
+\end{itemize}
+\section{Formalisme mathématique}
+\subsection{Définition formelle (Réseaux bayésiens)}
+Un réseau bayésien $ B = (G, \theta) $ est défini par:
+\begin{itemize}
+	\item une structure $ G = (V, E) $ qui est un graphe orienté sans circuit (DAG : Directed Acyclic Graph) où $V$ est l'ensemble des n\oe{}uds qui représentent un ensemble de variables aléatoires $ X = (X_1, ..., X_n) $  et $E$ est l'ensemble des arcs,
+	\item et des paramètres $ \theta = [ P (X_i /Pa(X_i))  ] $ qui sont des distributions de probabilités pour que B vérifie la condition de Markov.
+\end{itemize}
+De manière plus générale, les réseaux bayésiens (RB) sont des modèles graphiques pour représenter les relations probabilistes parmi un ensemble de variables aléatoires. Les RB offrent une représentation graphique de manière compacte des lois de probabilité jointes entre variables. La distribution de probabilités sur l'ensemble des variables est définie par:
+\begin{eqnarray}
+ P(X_1,X_2, ...,X_n) = \prod_{i=1}^n P(X_i/Pa(X_i))
+\end{eqnarray}
+Où $Pa(X_i)$est l'ensemble des parents du n\oe ud $Xi$ dans $G$ \cite{ref21}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{./image_chapitre1/figure_13}
+	\caption[Exemple de réseau bayésien]{Exemple de réseau bayésien}
+	\label{fig:figure_11}
+\end{figure}
+\section{Conclusion}
+Dans ce chapitre, nous avons défini le concept d'analyse des big data. Par la suite, nous avons procédé à de brefs rappels sur les approches du data mining, leurs définitions, méthodes, applications dans le big data et leurs limites ainsi que des rappels sur les réseaux bayésiens.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

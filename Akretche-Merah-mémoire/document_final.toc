@@ -1,0 +1,84 @@
+\babel@toc {french}{}
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }D\'edicace}{iii}{figure.caption.1}%
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }Remerciements}{iv}{section*.2}%
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }R\'esum\'e}{v}{section*.3}%
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }Table des mati\`eres}{vii}{section*.8}%
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }Liste des abr\'eviations}{x}{section*.9}%
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }Table des figures}{xi}{section*.10}%
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }Liste de tableaux}{xiii}{section*.11}%
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }Introduction g\'en\'erale}{1}{section*.12}%
+\contentsline {chapter}{\numberline {1}\sc L'analyse du big data}{4}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Introduction}{4}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Data mining (Fouille de donn\'ees)}{4}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}D\'efinition}{5}{subsection.1.2.1}%
+\contentsline {section}{\numberline {1.3}Machine Learning (Apprentissage automatique)}{5}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}M\'ethodes et m\'ecanismes du Machine Learning}{6}{subsection.1.3.1}%
+\contentsline {section}{\numberline {1.4}R\'eseaux de neurones (NN)}{6}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Le neurone formel}{6}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Le perceptron}{7}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Le perceptron multi-couches}{7}{subsection.1.4.3}%
+\contentsline {section}{\numberline {1.5}Deep Learning}{8}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}D\'efinition}{8}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}R\'etropropagation}{8}{subsection.1.5.2}%
+\contentsline {subsection}{\numberline {1.5.3}Sur-apprentissage}{9}{subsection.1.5.3}%
+\contentsline {subsection}{\numberline {1.5.4}Les diff\'erentes architectures du Deep Learning}{9}{subsection.1.5.4}%
+\contentsline {section}{\numberline {1.6}Les r\'eseaux de neurones convolutifs}{10}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}L'op\'eration de convolution}{10}{subsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.6.2}Architecture CNN}{11}{subsection.1.6.2}%
+\contentsline {section}{\numberline {1.7}L'analyse des donn\'ees du big data}{13}{section.1.7}%
+\contentsline {section}{\numberline {1.8}Limites du machine learning dans le Big Data}{14}{section.1.8}%
+\contentsline {section}{\numberline {1.9}Les r\'eseaux bay\'esiens}{15}{section.1.9}%
+\contentsline {subsection}{\numberline {1.9.1}C'est quoi un r\'eseau bay\'esien ?}{15}{subsection.1.9.1}%
+\contentsline {subsection}{\numberline {1.9.2}Pourquoi les r\'eseaux bay\'esiens ?}{16}{subsection.1.9.2}%
+\contentsline {section}{\numberline {1.10}Formalisme math\'ematique}{17}{section.1.10}%
+\contentsline {subsection}{\numberline {1.10.1}D\'efinition formelle (R\'eseaux bay\'esiens)}{17}{subsection.1.10.1}%
+\contentsline {section}{\numberline {1.11}Conclusion}{17}{section.1.11}%
+\contentsline {chapter}{\numberline {2}\sc Les r\'eseaux bay\'esiens profonds }{18}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Introduction}{18}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Les r\'eseaux bay\'esiens profonds }{18}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Travaux associ\'es}{19}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Architecture du r\'eseau bay\'esien profond pour le Big data mining \cite {ref18}}{19}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}R\'eseau de neurones bay\'esien \`a convolution profonde pour l'analyse de la qualit\'e des SMS \cite {ref27}}{19}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Construction des r\'eseaux de neurones profonds par l'apprentissage de la structure d'un r\'eseau bay\'esien \cite {ref33}}{20}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Reconnaissance faciale avec les r\'eseaux convolutifs bay\'esiens pour des syst\`emes de surveillance robustes \cite {ref34}}{20}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}R\'eseaux de neurones bay\'esiens convolutifs avec inf\'erence variationnelle approximative de Bernoulli \cite {ref35}}{21}{subsection.2.3.5}%
+\contentsline {subsection}{\numberline {2.3.6}Bayesian SegNet : Incertitude du mod\`ele dans les architectures d'encodeurs-d\'ecodeurs convolutifs profonds pour la compr\'ehension des sc\`enes \cite {ref36}}{21}{subsection.2.3.6}%
+\contentsline {subsection}{\numberline {2.3.7}Le dropout comme approximation bay\'esienne : Repr\'esentation de l'incertitude du mod\`ele dans l'apprentissage profond \cite {ref37}}{22}{subsection.2.3.7}%
+\contentsline {subsection}{\numberline {2.3.8}G\'en\'eration de conversation \'emotionnelle bas\'ee sur un r\'eseau neuronal bay\'esien profond \cite {ref38}}{22}{subsection.2.3.8}%
+\contentsline {section}{\numberline {2.4}L'apprentissage profond bay\'esien}{23}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Monte Carlo Dropout comme approximation bay\'esienne}{24}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Dropout}{24}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Estimation d'incertitude}{25}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}L'incertitude \'epist\'emique dans l'apprentissage profond bay\'esien \cite {ref45}}{25}{subsection.2.5.3}%
+\contentsline {subsection}{\numberline {2.5.4}L'inf\'erence variationnelle (VI) \cite {ref45}}{26}{subsection.2.5.4}%
+\contentsline {subsection}{\numberline {2.5.5}L'approximation de Monte-Carlo Dropout}{27}{subsection.2.5.5}%
+\contentsline {section}{\numberline {2.6}Conclusion}{30}{section.2.6}%
+\contentsline {chapter}{\numberline {3}\sc Impl\'ementation et r\'esultats exp\'erimentaux}{31}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction}{31}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Environnement et outils de travail}{32}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Environnement Mat\'eriel}{32}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Langages de programmation et logiciels}{32}{subsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.1}Librairies et biblioth\`eques}{33}{subsubsection.3.2.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2.2}Logiciels et \'editeurs de texte}{35}{subsubsection.3.2.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.3}Gestion de version}{35}{subsubsection.3.2.2.3}%
+\contentsline {subsection}{\numberline {3.2.3}Description du dataset}{36}{subsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.3.1}Pr\'eparation des donn\'ees}{36}{subsubsection.3.2.3.1}%
+\contentsline {section}{\numberline {3.3}Architecture et description}{37}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Architecture propos\'ee}{37}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Application du dropout}{38}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Fonction de perte et algorithme d'optimisation}{39}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Apprentissage du r\'eseau}{39}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}MC-Dropout Test}{39}{subsection.3.3.5}%
+\contentsline {section}{\numberline {3.4}Exp\'erimentation, \'evaluation et discussion des r\'esultats}{40}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}R\'esultats de l'\'etape d'apprentissage}{41}{subsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.1.1}R\'esultats obtenus pour le 1 er mod\`ele}{41}{subsubsection.3.4.1.1}%
+\contentsline {subsubsection}{\numberline {3.4.1.2}R\'esultats obtenus pour le 2\`eme mod\`ele}{43}{subsubsection.3.4.1.2}%
+\contentsline {subsection}{\numberline {3.4.2}Conclusion}{45}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}R\'esultats du MC Dropout test}{45}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}R\'esultats d'incertitude du mod\`ele}{46}{subsection.3.4.4}%
+\contentsline {section}{\numberline {3.5}R\'ealisation de l'application}{46}{section.3.5}%
+\contentsline {section}{\numberline {3.6}conclusion}{52}{section.3.6}%
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }Conclusion g\'en\'erale}{53}{section*.64}%
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }Bibliographie}{55}{section*.65}%
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }Webographie}{59}{section*.66}%
+\contentsfinish 

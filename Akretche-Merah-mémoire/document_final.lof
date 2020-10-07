@@ -1,0 +1,42 @@
+\babel@toc {french}{}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Mod\`ele d'apprentissage vu comme une bo\IeC {\^\i }te noire}}{6}{figure.caption.13}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces (a) un NN organis\'e en 4 couches, (b) le m\'ecanisme d'activation d'un neurone \cite {web01}}}{7}{figure.caption.14}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Un exemple de perceptron-multicouches constitu\'e de k couches \cite {web03}}}{8}{figure.caption.15}%
+\contentsline {figure}{\numberline {1.4}{\ignorespaces R\`egle de la cha\IeC {\^\i }ne}}{9}{figure.caption.16}%
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Architecture standard d'un r\'eseau de neurone convolutif \cite {web06}}}{10}{figure.caption.17}%
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Op\'eration de convolution En rouge : image en input. En bleu : le filtre de convolution. En violet : r\'esultat de l'application du filtre sur la partie de l'image s\'electionn\'ee \cite {web07}}}{11}{figure.caption.18}%
+\contentsline {figure}{\numberline {1.7}{\ignorespaces Types de fonctions d'activation \cite {web07}}}{12}{figure.caption.19}%
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Pooling avec un filtre 2x2 et un pas de 2}}{12}{figure.caption.20}%
+\contentsline {figure}{\numberline {1.9}{\ignorespaces Exemple de couche fully connected CNN \cite {web07}}}{13}{figure.caption.21}%
+\contentsline {figure}{\numberline {1.10}{\ignorespaces Mise \`a plat des images \cite {web08}}}{13}{figure.caption.22}%
+\contentsline {figure}{\numberline {1.11}{\ignorespaces Exemple de r\'eseau bay\'esien}}{17}{figure.caption.23}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Un r\'eseau de neurones lors de l'application de la technique de Dropout}}{25}{figure.caption.24}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Fonctionnement de dropout \cite {web13}}}{29}{figure.caption.25}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Logo du langage de programmation Python et de la distribution Anaconda}}{33}{figure.caption.28}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Logos de quelques librairies utilis\'ees}}{34}{figure.caption.36}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Logos des logiciels utilis\'es}}{35}{figure.caption.39}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Logo de Git}}{35}{figure.caption.41}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Exemples de 10 images al\'eatoires de chacune des 10 classes \cite {web25}}}{36}{figure.caption.42}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Architecture du mod\`ele propos\'e}}{37}{figure.caption.43}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Architecture du r\'eseau utilis\'e faite \`a l'aide de l'outil : alexlenail.me.}}{37}{figure.caption.44}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Courbes de pr\'ecision et de perte du 2eme mod\`ele avec SGD, lr=0.0001}}{40}{figure.caption.45}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Courbes de pr\'ecision et de perte du 1 er mod\`ele avec Adadelta, lr=0.001}}{41}{figure.caption.46}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Courbes de pr\'ecision et de perte du 1 er mod\`ele avec Adam, lr=0.0001}}{41}{figure.caption.47}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Courbes de pr\'ecision et de perte du 1 er mod\`ele avec SGD, lr=0.001}}{42}{figure.caption.48}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Courbes de pr\'ecision et de perte du 2\`eme mod\`ele avec Adadelta, lr=0.01}}{43}{figure.caption.50}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Courbes de pr\'ecision et de perte du 2\`eme mod\`ele avec Adam, lr=0.0001}}{43}{figure.caption.51}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Courbes de pr\'ecision et de perte du 2\`eme mod\`ele avec SGD, lr=0.001}}{44}{figure.caption.52}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Score du MC Dropout test et pr\'ecisions de chaque classe}}{45}{figure.caption.54}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Pourcentage d'incertitude des diff\'erentes classes}}{46}{figure.caption.55}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Architecture du r\'eseau utilis\'e faite \`a l'aide de l'outil : alexlenail.me}}{47}{figure.caption.56}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces L'interface de l'application}}{47}{figure.caption.57}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Affichage d'un ensemble al\'eatoire des images d'entrainement}}{48}{figure.caption.58}%
+\contentsline {figure}{\numberline {3.20}{\ignorespaces distribution des images d'entrainement par classe}}{49}{figure.caption.59}%
+\contentsline {figure}{\numberline {3.21}{\ignorespaces La phase d'entrainement}}{49}{figure.caption.60}%
+\contentsline {figure}{\numberline {3.22}{\ignorespaces La pr\'ecision et la perte durant la phase d'entrainement}}{50}{figure.caption.61}%
+\contentsline {figure}{\numberline {3.23}{\ignorespaces La pr\'ecision de chaque classe durant la phase du test : Application}}{51}{figure.caption.62}%
+\contentsline {figure}{\numberline {3.24}{\ignorespaces Pourcentage d'incertitude de diff\'erentes classes : Application}}{52}{figure.caption.63}%
+\contentsfinish 

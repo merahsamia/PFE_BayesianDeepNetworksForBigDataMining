@@ -1,0 +1,239 @@
+
+%----------------------------------------------------%
+%        Déclaration des packages utiles             %
+%----------------------------------------------------%
+\documentclass[12pt,a4paper,fleqn]{book}%
+\usepackage{cite}%
+\renewcommand\citeleft{(}
+\renewcommand\citeright{)}
+\makeatletter
+\renewcommand{\@biblabel}[1]{(#1)}
+\makeatother
+\usepackage[T1]{fontenc}%
+\usepackage{bbding}%
+\usepackage{pifont}%
+\usepackage[ansinew]{inputenc}%
+\usepackage [french]{babel}%
+\usepackage{graphicx,wrapfig,lipsum}%
+\usepackage{hyperref}%
+\usepackage{caption}%
+\usepackage{multirow}%
+\hypersetup{colorlinks,%
+citecolor=black,%
+filecolor=black,%
+linkcolor=blue,%
+urlcolor=blue,pdftex,}%
+%\usepackage{mathptmx}%police
+\usepackage{lmodern}
+\usepackage{eurosym}
+\usepackage{amsmath}%
+\usepackage{amssymb} %
+\usepackage{pifont} %
+\usepackage{anysize}%
+\usepackage{fancyhdr}%
+\usepackage[Sonny]{fncychap}%
+\usepackage{fancybox}%
+\usepackage{color}% 
+\usepackage{lettrine}%
+\usepackage{titletoc}%
+\usepackage{lscape} %
+\usepackage{enumitem} %
+\usepackage{bold-extra} %
+\usepackage{float} %
+\usepackage[titletoc]{appendix} %
+\marginsize{2cm}{1.5cm}{1.5cm}{1.5cm}
+\usepackage[left=1.2in, right=1in, top=1in, bottom=1in,asymmetric]{geometry}
+
+\titlecontents{table}
+[0pt]                                           
+{\addvspace{.1cm}}%                         
+{\contentsmargin{0pt}                     
+    Table~\thecontentslabel:\enspace
+    \normalsize}
+{\contentsmargin{0pt}\large}                  
+{\titlerule*[.5pc]{.}\contentspage}                
+[\addvspace{.01pc}] 
+
+\titlecontents{figure}
+[0pt]                                           
+{\addvspace{.1cm}}%                         
+{\contentsmargin{0pt}                     
+    Figure~\thecontentslabel:\enspace
+    \normalsize}
+{\contentsmargin{0pt}\large}                  
+{\titlerule*[.5pc]{.}\contentspage}                
+[\addvspace{.01pc}] 
+
+\renewcommand{\citeform}[1]{\textbf{#1}}
+
+\newcommand*{\captionsource}[2]{%
+  \caption[{#1}]{%
+    #1%
+    \\\hspace{\linewidth}%
+    \textbf{Source:} #2%
+  }%
+}
+
+
+%-----------------------------------------------------%
+
+%\captionsetup{labelfont=bf, labelfont = sc}
+
+
+
+
+\begin{document}
+\sloppy
+%------------------Page de garde---------------------%
+\include{ppgarde}
+%------------------Page vide------------------------%
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}%
+\renewcommand{\footrulewidth}{0pt}
+
+
+%---------------------------------------------------------%
+%                   Style des pages                       %
+%---------------------------------------------------------%
+\cleardoublepage
+\fancypagestyle{plain}{%
+\fancyhf{}% on efface tout
+\fancyfoot[C]{\thepage}% numéro en bas de la page
+%% on efface tous les traits
+\renewcommand{\headrulewidth}{0.5pt}%
+\renewcommand{\footrulewidth}{0.5pt}}
+
+\fancyhf{}\pagestyle{fancy}\fancyfoot[C]{\thepage}%
+\pagenumbering{roman}
+\setcounter{page}{3}
+\renewcommand{\headrulewidth}{0.5pt}%
+\renewcommand{\footrulewidth}{0.5pt}
+\include{dedicace}
+\let\cleardoublepage\clearpage
+\cleardoublepage \ChNameVar{\bfseries\Large} \ChNumVar{\huge}
+\ChTitleVar{\Large\bfseries} \ChRuleWidth{1pt} \ChNameUpperCase
+\cleardoublepage
+\renewcommand{\baselinestretch}{1.25}
+%----------------Remerciements--------------------------%
+\thispagestyle{fancy}\fancyhead[LE,RO]{} \fancyhead[LO]{}
+\fancyhead[RE]{} \fancyhead[C]{\bfseries Remerciements}
+\phantomsection
+\addcontentsline{toc}{chapter}{\numberline{}Remerciements}
+\include{thanks}
+%----------------Abstract------------------------------%
+\cleardoublepage \thispagestyle{fancy} \fancyhead[LE,RO]{}
+\fancyhead[LO]{} \fancyhead[RE]{} \fancyhead[C]{\bfseries Résumé}
+\phantomsection
+\addcontentsline{toc}{chapter}{\numberline{}Résumé}
+\include{abstract}
+\let\cleardoublepage\clearpage
+
+%---------------------Table des matières----------------%
+\cleardoublepage \fancyhead{} \normalsize \fancyhead[LE,RO]{}
+\fancyhead[LO]{} \fancyhead[RE]{} \fancyhead[C]{\bfseries Table des
+matières} \fancyfoot[C]{\thepage}
+\phantomsection
+\addcontentsline{toc}{chapter}{\numberline{}Table des matières}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+{\hypersetup{linkcolor=black}
+\tableofcontents
+}
+%\tableofcontents
+\let\cleardoublepage\clearpage
+%---------------------Symbole et Abréviations---------%
+\cleardoublepage\thispagestyle{fancy}\fancyhead[LE,RO]{}
+\fancyhead[LO]{} \fancyhead[RE]{} \fancyhead[C]{\bfseries Liste des abréviations}
+\phantomsection
+\addcontentsline{toc}{chapter}{\numberline{}Liste des abréviations}
+\include{symbabrev}
+
+\let\cleardoublepage\clearpage
+%--------------------Liste des figures--------------------%
+\cleardoublepage \fancyhead{} \fancyhead[LE,RO]{} \fancyhead[LO]{}
+\fancyhead[RE]{} \fancyhead[C]{\bfseries Table des figures}
+\fancyfoot[C]{\thepage}
+\phantomsection
+\addcontentsline{toc}{chapter}{\numberline{}Table des figures}
+\include{pagevide}
+{\hypersetup{linkcolor=black}
+\listoffigures
+}
+
+\let\cleardoublepage\clearpage
+%--------------------Liste des tables---------------------%
+\cleardoublepage\thispagestyle{fancy} \fancyhead[LE,RO]{}
+\fancyhead[LO]{} \fancyhead[RE]{} \fancyhead[C]{\bfseries Liste de tableaux} \fancyfoot[C]{\thepage}
+\phantomsection
+\addcontentsline{toc}{chapter}{\numberline{}Liste de tableaux}
+{\hypersetup{linkcolor=black}
+\listoftables
+}
+
+\let\cleardoublepage\clearpage
+\cleardoublepage
+%-----------------------Introduction---------------------%
+\thispagestyle{fancy} \fancyhead[LE,RO]{} \fancyhead[LO]{}
+\fancyhead[RE]{} \fancyhead[C]{\bfseries Introduction générale}
+\pagenumbering{arabic}
+\phantomsection
+\addcontentsline{toc}{chapter}{\numberline{}Introduction générale}
+\include{introduction}
+%--------------------------------------------------------%
+%              Style des chapitres                       %
+%--------------------------------------------------------%
+\cleardoublepage\fancyhead{}\thispagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhead[LE,RO]{\sc\bfseries Chapitre \thechapter}
+\fancyhead[LO]{\bfseries\rightmark}
+\fancyhead[RE]{\sc\bfseries\leftmark}
+%----------------------Les chapitres---------------------%
+\include{chapitre1}
+\include{pagevide}
+\include{chapitre2}
+\include{pagevide}
+\include{chapitre3}
+\include{pagevide}
+
+%-----------------------Conclusion-----------------------%
+\fancyhead[LE,RO]{} \fancyhead[LO]{}\fancyhead[RE]{}
+\fancyhead[C]{\bfseries Conclusion générale}
+\renewcommand{\footrulewidth}{0.5pt}
+\phantomsection
+\addcontentsline{toc}{chapter}{\numberline{}Conclusion générale}
+\include{conclusion}
+
+%----------------------Bibliographie---------------------%
+\fancyhead[LE,RO]{} \fancyhead[LO]{}\fancyhead[RE]{}
+\fancyhead[C]{\bfseries Bibliographie}
+\renewcommand{\footrulewidth}{0.5pt}
+\phantomsection
+\renewcommand\bibname{Bibliographie}
+\addcontentsline{toc}{chapter}{\numberline{}Bibliographie}
+\include{biblio1}
+
+%----------------------Webographie---------------------%
+\fancyhead[LE,RO]{} \fancyhead[LO]{}\fancyhead[RE]{}
+\fancyhead[C]{\bfseries Webographie}
+\renewcommand{\footrulewidth}{0.5pt}
+\phantomsection
+\renewcommand\bibname{Webographie}
+\addcontentsline{toc}{chapter}{\numberline{}Webographie}
+\include{biblio2}
+
+%----------------------Webographie---------------------%
+%\fancyhead[LE,RO]{} \fancyhead[LO]{}\fancyhead[RE]{}
+%\fancyhead[C]{\bfseries Bibliographie - Webographie}
+%\renewcommand{\footrulewidth}{0.5pt}
+%\phantomsection
+%\renewcommand\bibname{Webographie}
+%\addcontentsline{toc}{chapter}{\numberline{} Webographie}
+%\include{biblio2}
+%--------------------------Page vide---------------------%
+\include{pagevide}\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}%
+\renewcommand{\footrulewidth}{0pt}
+
+\end{document}

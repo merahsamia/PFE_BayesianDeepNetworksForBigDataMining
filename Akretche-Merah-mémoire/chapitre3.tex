@@ -1,0 +1,366 @@
+\chapter{\sc Implémentation et résultats expérimentaux}
+\section{Introduction}
+ L'objectif de ce chapitre est de présenter les étapes de l'implémentation de l'approche de Monte Carlo Dropout. Nous allons donc nous intéresser au problématique de la classification d'images qui est la tâche d'attribuer à une image d'entrée x un label y à partir d'un ensemble fixe de catégories. C'est l'un des problèmes fondamentaux de la vision par ordinateur qui, malgré sa simplicité, a une grande variété d'applications pratiques. Pour cela, nous utilisons les réseaux de neurones convolutifs (CNN) qui sont les architectures état-de-l'art dans la quasi-totalité des tâches de classification liées aux images. Nous simulons le cas du big data en choisissant le big dataset CIFAR10.\\[0.5\baselineskip]
+Nous commençons tout d'abord par la présentation des ressources, du langage et de l'environnement de développement que nous avons utilisé. Puis les étapes de la réalisation du modèle et on termine par les tests effectués.\\[0.5\baselineskip]
+Ce chapitre est composé de deux parties, l'implémentation du système et les résultats expérimentaux des tests.
+\newpage
+\section{Environnement et outils de travail}
+Nous allons présenter les différents logiciels, langages et libraires utilisés pour implémenter notre approche proposée.
+\subsection{Environnement Matériel}
+Le matériel utilisé le long de ce projet consiste en deux ordinateurs personnels ainsi qu'un serveur (Cloud). Nous nous sommes tournées vers les serveurs fournis par l'outil Google Colab. Etant donné le temps considérable que prend l'opération d'apprentissage des modèles sur nos propres machines.\\[0.5\baselineskip]
+\textbf{Poste de travail 1:}
+\begin{center}
+\begin{tabular}{|l|l|}
+	\hline
+	Processeur & Intel(R)® Core i3-4005U CPU @ 1.70 GHz \\
+	\hline
+	RAM & 4.00 Go  \\
+	\hline
+\end{tabular}
+	\captionof{table}{Caractéristiques du poste de travail 1}
+	\label{tab_01}
+\end{center}
+\textbf{Poste de travail 2:}
+\begin{center}
+\begin{tabular}{|l|l|}
+	\hline
+	Processeur & Intel(R)® Core (TM) i5-3230M CPU @ 2.60 GHz \\
+	\hline
+	RAM & 4.00 Go  \\
+	\hline
+\end{tabular}
+	\captionof{table}{Caractéristiques du poste de travail 2}
+	\label{tab_02}
+\end{center}
+\textbf{Serveur Cloud (Google Colaboratory) :}
+\begin{center}
+	\begin{tabular}{|l|l|}
+		\hline
+		Processeur & (2x) Intel(R) Xeon(R) CPU @ 2.20GHz \\
+		\hline
+		RAM & 13 Go  \\
+		\hline
+		Processeur graphique & Tesla K80  \\
+		\hline
+	\end{tabular}
+	\captionof{table}{Caractéristiques du service Colab (Google Colaboratory)}
+	\label{tab_02}
+\end{center}
+\subsection{Langages de programmation et logiciels}
+Nous avons utilisé au cours de la réalisation de notre système plusieurs langages de programmation, bibliothèques, outils et logiciels. Voici une brève présentation de chacun de ces derniers: 
+\subsubsection*{Python}
+Python est un langage de programmation de haut niveau. Il supporte la programmation impérative structurée, fonctionnelle et orientée objet. Il est doté d'un typage dynamique fort et d'une gestion automatique de la mémoire. Il est réputé pour être un langage simple à utiliser. Plusieurs bibliothèques sont fournies afin de faciliter les développements \cite{web14}.
+\subsubsection*{Anaconda}
+Anaconda est une distribution libre et open source  de Python  appliqué au développement d'applications dédiées à la science des données et à l'apprentissage automatique. Les versions de paquetages sont gérées par le système de gestion de paquets conda5. L'avantage de ces distributions est de pouvoir installer plus facilement les librairies sans soucis de compatibilité entre différents paquets.La distribution Anaconda est utilisée par plus de 20 millions d'utilisateurs et comprend plus de 250 paquets populaires en science des données adaptés pour Windows, Linux et MacOS \cite{web15}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_01}
+	\caption[Logo du langage de programmation Python et de la distribution Anaconda]{Logo du langage de programmation Python et de la distribution Anaconda}
+	\label{fig:figure_3_01}
+\end{figure}
+\subsubsection{Librairies et bibliothèques}
+\subsubsection*{Pytorch}
+PyTorch est une bibliothèque logicielle Python d'apprentissage automatique qui s'appuie sur Torch développée par Facebook. Elle permet d'effectuer les calculs tensoriels nécessaires notamment pour l'apprentissage profond. Ces calculs sont optimisés et effectués soit par le processeur (CPU) soit, lorsque c'est possible, par un processeur graphique (GPU) supportant CUDA. Il est issu des équipes de recherche de Facebook, et avant cela de Ronan Collobert dans l'équipe de Samy Bengio à l'IDIAP \cite{web16}.
+\subsubsection*{Numpy}
+Pour Numerical Python, est une bibliothèque qui permet d'effectuer des calculs numériques avec le langage Python. Elle introduit une gestion facilitée des tableaux de nombres, qui sont d'une certaine manière, comme les listes en Python, mais Numpy permet de rendre la manipulation des matrices ou tableaux multidimensionnels ainsi que des fonctions mathématiques opérant sur ces tableaux,beaucoup plus efficaces, surtout sur les tableaux de large taille. Les tableaux Numpy sont au c\oe ur de presque tout l'écosystème de data science en Python \cite{web17}.
+\subsubsection*{Matplotlib}
+Pour Mathematic Plot library  est une bibliothèque gratuite complète pour créer des visualisations statiques, animées et interactives en Python \cite{web18}.
+\subsubsection*{Html}
+Le HyperText Markup Language, généralement abrégé HTML ou dans sa dernière version HTML5, est le langage de balisage conçu pour représenter les pages web. C'est un langage permettant d'écrire de l'hypertexte, d'où son nom. HTML permet également de structurer sémantiquement la page, de mettre en forme le contenu, de créer des formulaires de saisie, d'inclure des ressources multimédias dont des images, des vidéos, et des programmes informatiques \cite{web19}.
+\subsubsection*{Css}
+Les feuilles de style en cascade, généralement appelées CSS de l'anglais Cascading Style Sheets, forment un langage informatique qui décrit la présentation des documents HTML et XML. Les standards définissant CSS sont publiés par le World Wide Web Consortium (W3C). Introduit au milieu des années 1990, CSS devient couramment utilisé dans la conception de sites web et bien pris en charge par les navigateurs web dans les années 2000 \cite{web20}.
+\subsubsection*{JavaScript}
+JavaScript JS est un langage de programmation de scripts principalement employé dans les pages web interactives et à ce titre est une partie essentielle des applications web. Avec les technologies HTML et CSS \cite{web21}.
+\subsubsection*{Eel}
+Eel est une petite bibliothèque Python pour créer des applications GUI HTML/JS de type électronique. Ceci utilisé pour créer des interfaces graphiques dans une fenêtre d'application Chrome avec HTML, CSS et JS. En résumé, il héberge un serveur web local, puis fournit des fonctionnalités pour communiquer entre JavaScript et Python \cite{web22}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{./image_chapitre3/figure_25}
+	\caption[Logos de quelques librairies utilisées]{Logos de quelques librairies utilisées}
+	\label{fig:figure_3_25}
+\end{figure}
+\subsubsection{Logiciels et éditeurs de texte}
+\subsubsection*{Pycharm}
+PyCharm est un environnement de développement intégré utilisé pour programmer en Python. Il permet l'analyse de code et contient un débogueur graphique. Il permet également la gestion des tests unitaires, l'intégration de logiciel de gestion de versions, et supporte le développement web avec Django.\\[0.5\baselineskip]
+Développé par l'entreprise tchèque JetBrains, c'est un logiciel multi-plateforme qui fonctionne sous Windows, Mac OS X et Linux. Il est décliné en édition professionnelle, diffusé sous licence propriétaire, et en édition communautaire diffusé sous licence Apache \cite{web23}.
+
+ \subsubsection*{Jupyter Notebook}
+Jupyter est une interface web dans laquelle il est possible d'utiliser et d'éditer du code en Python (ainsi que plusieurs autres langages), de l'exécuter et de voir directement les résultats, comprenant également une visualisation à l'aide de graphiques \cite{web24}. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{./image_chapitre3/figure_03}
+	\caption[Logos des logiciels utilisés]{Logos des logiciels utilisés}
+	\label{fig:figure_3_03}
+\end{figure}
+\subsubsection{Gestion de version}
+\subsubsection*{Git}
+Un logiciel libre de gestion de version. Il se distingue par sa rapidité et sa gestion des branches qui permettent de développer en parallèle de nouvelles fonctionnalités.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{./image_chapitre3/figure_04}
+	\caption[Logo de Git]{Logo de Git}
+	\label{fig:figure_3_04}
+\end{figure}
+\subsection{Description du dataset}
+Le CIFAR-10 est un sous-ensemble étiqueté parmi 80 millions de  jeux de données d'images. Il a été recueilli par Alex Krizhevsky, Vinod Nair, et Geoffrey Hinton.\\[0.5\baselineskip]
+La base d'image de CIFAR-10 se compose de 60000 images couleur, chaque image à une taille de 32x32, ces images sont réparties en 10 classes, avec 6000 images par classe. Dans cette base on trouve 50000 images pour l'apprentissage et 10000 images pour le test \cite{web25}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_05}
+	\caption[Exemples de 10 images aléatoires de chacune des 10 classes \cite{web25}]{Exemples de 10 images aléatoires de chacune des 10 classes \cite{web25}}
+	\label{fig:figure_3_05}
+\end{figure}
+\subsubsection{Préparation des données}
+Une technique courante en machine learning est de normaliser les données afin de mieux conditionner l'apprentissage. En apprentissage avec les CNN, la technique la plus courante est de calculer sur l'ensemble d'entrainement la valeur moyenne $ \mu $ et l'écart type $ \sigma $ de chaque canal RGB. On obtient donc 6 valeurs. On normalise ensuite chaque image en soustrayant à chaque pixel la valeur moyenne correspondant à son canal et en la divisant par l'écart type correspondant.\\[0.5\baselineskip]
+Pour CIFAR-10, les valeurs sont $ \mu = [0.491, 0.482, 0.447] $ et $ \sigma = [0.202, 0.199, 0.201] $. Mais, avant de réaliser l'étape de normalisation on doit tout d'abord convertir nos images en tenseurs pour pouvoir les manipuler facilement par la suite.\\[0.5\baselineskip]
+Le réseau de neurone convolutif nécessite de grands ensembles d'images d'entrainement pour obtenir un bon résultat. Les données disponibles pour l'entrainement sont divisées en deux ensembles différents : Ensemble d'apprentissage et Ensemble de validation. Il ne devrait pas y avoir de chevauchement entre ces deux ensembles des données afin d'améliorer la capacité de généralisation du réseau de neurones. Les performances réelles d'un réseau ne sont révélées que lorsque le réseau est testé avec des données de test pour mesurer le rendement du modèle sur les données qui n'ont pas été vues pendant l'apprentissage. Le test est conçu pour accéder à la capacité de généralisation du réseau. Une bonne généralisation signifie que le réseau fonctionne correctement sur des données similaires, mais différentes des données d'apprentissage.
+\section{Architecture et description}
+\subsection{Architecture proposée}
+Les réseaux de neurones convolutifs (CNN) sont devenus les architectures état-de-l'art dans la quasi-totalité des tâches de machine learning liées aux images.\\[0.5\baselineskip]
+Le modèle que nous proposons est composé de deux couches de convolution, deux couches de maxpooling ainsi que trois couches entièrement connectées, l'architecture du modèle se présente comme suit:\\
+
+	Input > Conv (ReLU) > MaxPool > Conv (ReLU) > MaxPool > FC (ReLU) > FC (ReLU) > FC > 10 outputs
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_06}
+	\caption[Architecture du modèle proposé]{Architecture du modèle proposé}
+	\label{fig:figure_3_06}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_07}
+	\caption[Architecture du réseau utilisé faite  à l'aide de l'outil : alexlenail.me.]{Architecture du réseau utilisé faite  à l'aide de l'outil : \textbf{alexlenail.me}}
+	\label{fig:figure_3_07}
+\end{figure}
+Les images en entrées sont de format 3x32x32, .c.à.d. 3 canaux (RGB) chacune de taille 32x32 pixels.\\[0.5\baselineskip]
+L'image passe d'abord par la première couche de convolution, cette couche est composée de 192 filtres chacun de taille 5x5, après cette convolution 192 feature maps de taille 32x32 seront créés.\\[0.5\baselineskip]
+Par la suite, une couche de maxpooling est appliquée à ces feature maps avec un kernel de 2x2 qui va réduire la taille de la sortie à 192x16x16, et donc on aura 192 feature maps de taille 16x16.\\[0.5\baselineskip]
+La 2eme couche de convolution va utiliser 192 autres filtres de taille 5x5 pour appliquer une convolution aux 192 feature maps en sortie de la couche précédente.\\[0.5\baselineskip]
+Une dernière couche de maxpooling est appliquée pour réduire la taille des feature maps en sortie de 192x16x16 à 192x8x8.\\[0.5\baselineskip]
+La sortie de la couche finale du maxpooling doit être aplatie afin que nous puissions la connecter à une couche entièrement connectée. Pour ce faire, on utilise la méthode du torch.tensor.view, en spécifiant -1, la méthode déduira automatiquement le nombre de lignes adaptés aux nombre de colonnes en entrées. Ceci est fait pour traiter la taille des mini batch de données.\\[0.5\baselineskip]
+La 1ere couche entièrement connectée utilise une fonction d'activation Relu et elle est composée de 1024 neurones.\\[0.5\baselineskip]
+La 2ème couche entièrement connectée utilise également une fonction d'activation Relu et est connectée à la couche précédente avec 256 neurones.\\[0.5\baselineskip]
+Enfin, La 3ème couche entièrement connectées est liée aux 256 sorties de la couche précédente pour pouvoir à la fin, générer 10 outputs (une pour chaque classe du CIFAR-10), Notons que nous n'avons pas utilisé une activation dans cette couche en raison de l'utilisation de la fonction CrossEntropyLoss qui combine à la fois une activation SoftMax et une fonction de perte cross entropy.
+\subsection{Application du dropout}
+Nous avons proposé deux modèles où la différence se situe dans les couches de l'application du dropout. Nous allons comparer les performances des deux méthodes sur la base des résultats des expérimentations. 
+\begin{itemize}
+	\item \textbf{1er modèle (Convolutional and fully-connected dropout)}\\
+	Nous avons appliqué le dropout sur les couches de convolutions (conv1, conv2) ainsi que sur les couches entièrement connectées (fc1, fc2).
+	\item \textbf{2ème modèle (Max-pooling and fully-connected dropout)}\\
+	Nous avons appliqué le dropout sur les deux couches maxpooling ainsi que sur les couches entièrement connectées (fc1, fc2).
+\end{itemize}
+\subsection{Fonction de perte et algorithme d'optimisation}
+Nous avons choisi la fonction de perte CrossEntropyLoss car elle est convenable pour les problèmes de classification en k classes $ k \geq 3 $, et aussi car elle minimise la distance entre deux distributions de probabilité (les valeurs prévues et les valeurs réelles). Concernant l'optimiseur (algorithme d'optimisation), nous avons choisi d'utiliser les méthodes SGD, Adam et Adadelta.
+\subsection{Apprentissage du réseau}
+Nous allons maintenant entrainer le réseau en utilisant les données du trainloader, en parcourant toutes les données d'entrainement par batch de 4 images, et en répétant l'ensemble du processus autant de fois que nécessaire pour ne pas tomber dans le surapprentissage. Après chaque 2000 batch, nous affichons quelques statistiques concernant le progrès de l'apprentissage : l'époque actuelle, l'étape courante ainsi que la valeur de la fonction de perte.\\[0.5\baselineskip]
+Nous allons tester en parallèle l'efficacité de notre modèle sur un ensemble de validation en calculant la précision du modèle (accuracy) ainsi que la valeur de la fonction de perte (Loss) pour pouvoir par la suite détecter le surapprentissage et après cela choisir le nombre d'époques optimal pour notre apprentissage.\\[0.5\baselineskip]
+A la fin de chaque époque, nous affichons la valeur de précision et la valeur de perte de l'ensemble d'apprentissage ainsi que celles de l'ensemble de validation.
+\subsection{MC-Dropout Test}
+Cette partie représente le c\oe{}ur de notre approche où nous allons introduire l'aspect bayésien. Contrairement aux utilisations standard du dropout, qui se suffit d'utiliser le dropout durant la phase d'apprentissage du réseau, nous allons étendre son utilisation pour le test aussi (seulement pour les couches du dropout). Par la suite, nous générons pour chaque entrée une liste de prédictions à travers plusieurs MCD forward passes. Nous calculons ensuite la moyenne des prédictions sur les T itérations qui va être utilisée comme moyenne finale des prédictions sur l'échantillon de test. La classe avec la moyenne prédictive la plus élevée est sélectionnée comme prédiction finale de la sortie. D'autre part, nous allons utiliser les listes de prédictions à travers plusieurs forward passes pour calculer l'incertitude de chaque classe. Nous commençons par générer une moyenne des prédictions pour chaque classe tout au long des T itérations, cette moyenne est calculée par lot et ensuite pour tout l'ensemble de test, et enfin, nous allons utiliser cette moyenne pour mesurer l'entropie de chaque classe qui va nous permettre de déduire l'incertitude du modèle pour chaque classe.
+\section{Expérimentation, évaluation et discussion des résultats}
+Dans cette parie, nous exposons les différentes expérimentations menées ainsi qu'une étude comparative des deux modèles proposés précédemment. Nous illustrons les résultats en termes de précision et d'erreur pour aboutir à la fin à un résultat probant.
+\begin{itemize}
+	\item[\ding{228}] \textbf{Nombre d'époques (epochs)}\\[0.5\baselineskip]
+	Nous avons effectué un premier apprentissage avec 10 époques mais celui-ci progressant encore, nous l'avons rechargé et augmenté à 75 jusqu'à 100 itérations. Après plusieurs tests et exécutions successifs, nous avons vite remarqué que la plupart de nos apprentissages se stabilisent entre 20 et 30 itérations, valeurs que nous avons gardées tout au long de nos expérimentations, sauf pour l'optimiseur SGD qui parfois continue à progresser tout au long de 100 itérations (figure \ref{fig:figure_3_07}).
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_08}
+		\caption[Courbes de précision et de perte du 2eme modèle avec SGD, lr=0.0001]{Courbes de précision et de perte du 2eme modèle avec \textbf{SGD}, $lr=0.0001$}
+		\label{fig:figure_3_08}
+	\end{figure}
+	\item[\ding{228}] \textbf{learning rate}\\[0.5\baselineskip]
+	Nous avons exécuté successivement des apprentissages avec plusieurs valeurs de learning rate, allant de 0.0001 jusqu'à 0.01, avec les différents algorithmes d'optimisation définis précédemment.
+\end{itemize}
+\newpage
+\subsection{Résultats de l'étape d'apprentissage}
+\subsubsection{Résultats obtenus pour le 1 er modèle}
+\begin{itemize}
+	\item[\ding{228}] \textbf{L'optimiseur Adadelta}
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_09}
+		\caption[Courbes de précision et de perte du 1 er modèle avec Adadelta, lr=0.001]{Courbes de précision et de perte du 1 er modèle avec \textbf{Adadelta}, $lr=0.001$}
+		\label{fig:figure_3_09}
+	\end{figure}
+	\item[\ding{228}] \textbf{L'optimiseur Adam}
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_10}
+		\caption[Courbes de précision et de perte du 1 er modèle avec Adam, lr=0.0001]{Courbes de précision et de perte du 1 er modèle avec \textbf{Adam}, $lr=0.0001$}
+		\label{fig:figure_3_10}
+	\end{figure}
+\newpage
+	\item[\ding{228}] \textbf{L'optimiseur SGD}
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_11}
+		\caption[Courbes de précision et de perte du 1 er modèle avec SGD, lr=0.001]{Courbes de précision et de perte du 1 er modèle avec \textbf{SGD}, $lr=0.001$}
+		\label{fig:figure_3_11}
+	\end{figure}
+\end{itemize}
+\subsubsection*{Discussion des résultats}
+Les tests effectués avec Adam sur le modèle 1 n'ont pas été satisfaisants, malgré qu'ils atteignent une précision de 77\% avec un $ lr = 0 $. 0001. Cependant le modèle tombe rapidement dans le surapprentissage après seulement 7 epochs, et ne dépasse pas les 10\% pour les autres valeurs du learning rate.\\[0.5\baselineskip]
+Avec une valeur de $ lr = 0.01 $, Adadelta a atteint une valeur de précision de 74\%. Diminuer la valeur du learning rate à 0.001 puis à 0.0001 engendre les précisions de 67\% et 50\%.\\[0.5\baselineskip]
+Quant à SGD, c'est la méthode donnant le résultat le plus prometteur mais qui reste néanmoins insuffisant.
+\begin{center}
+	\begin{tabular}{|l|l|}
+		\hline
+		Optimiseur & Précision Max \\
+		\hline
+		SGD & 78\%  \\
+		\hline
+		Adadelta & 67\%  \\
+		\hline
+		Adam & 77\%  \\
+		\hline
+	\end{tabular}
+	\captionof{table}{Les résultats obtenus par les différents optimiseurs utilisés dans le premier modèle}
+	\label{tab_04}
+\end{center}
+\newpage
+\subsubsection{Résultats obtenus pour le 2ème modèle}
+\begin{itemize}
+	\item[\ding{228}] \textbf{L'optimiseur Adadelta}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_12}
+		\caption[Courbes de précision et de perte du 2ème modèle avec Adadelta, lr=0.01]{Courbes de précision et de perte du 2ème modèle avec \textbf{Adadelta}, $lr=0.01$}
+		\label{fig:figure_3_12}
+	\end{figure}
+	\item[\ding{228}] \textbf{L'optimiseur Adam}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_13}
+		\caption[Courbes de précision et de perte du 2ème modèle avec Adam, lr=0.0001]{Courbes de précision et de perte du 2ème modèle avec \textbf{Adam}, $lr=0.0001$}
+		\label{fig:figure_3_13}
+	\end{figure}
+	\newpage
+	\item[\ding{228}] \textbf{L'optimiseur SGD}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_14}
+		\caption[Courbes de précision et de perte du 2ème modèle avec SGD, lr=0.001]{Courbes de précision et de perte du 2ème modèle avec \textbf{SGD}, $lr=0.001$}
+		\label{fig:figure_3_14}
+	\end{figure}
+\end{itemize}
+\subsubsection*{Discussion des résultats}
+Les tests effectués sur le 2eme modèle ont montré que les meilleurs résultats sont obtenus en utilisant l'optimiseur SGD qui atteint 82\% avec un $ lr = 0 $. 001. Néanmoins, les précisions diminuent en baissant les valeurs de learning rate (78\% avec $ lr = 0.001 $ et 73\% avec $ lr = 0.0001 $).\\[0.5\baselineskip]
+Malgré sa popularité, les tests effectués avec Adam sur le 2eme modèle n'ont pas été satisfaisants. Bien qu'ils atteignent une précision de 76\% avec un $ lr = 0.0001 $, l'apprentissage avec Adam a mené vers un surapprentissage assez rapidement, ne dépassant pas les dix itérations, ainsi qu'une valeur de précision qui ne dépasse pas les 10\% avec différentes valeurs de learning rate. c
+En ce qui concerne l'optimiseur Adadelta, le modèle a atteint des valeurs de précisions entre 74\%,72\%,42\% en diminuant la valeur du learning rate respectivement de 0.01, 0.001, 0.0001.\\[0.5\baselineskip]
+L'utilisation prometteuse du SGD pourrait être améliorée en augmentant le nombre de données, ce qui implique plus de calculs et donc requiert plus de ressources.\\[0.5\baselineskip]
+\begin{center}
+	\begin{tabular}{|l|l|}
+		\hline
+		Optimiseur & Précision Max \\
+		\hline
+		SGD & 82\%  \\
+		\hline
+		Adadelta & 74\%  \\
+		\hline
+		Adam & 76\%  \\
+		\hline
+	\end{tabular}
+	\captionof{table}{Les résultats obtenus par les différents optimiseurs utilisés dans le deuxième modèle}
+	\label{tab_05}
+\end{center}
+\subsection{Conclusion}
+D'après les différentes expérimentations et configurations testées, le meilleur taux de précision a été obtenu avec l'architecture du modèle 2 \textbf{(Max-pooling and fully-connected dropout)}, avec application du dropout sur les couches de pooling et des couches entièrement connectées, en utilisant l'optimiseur SGD avec un $lr=0.001$ Dans l'ensemble, cette dernière a globalement surpassé les performances obtenues avec le modèle1.Ce résultat nous a permis d'utiliser le modèle 2 \textbf{(Max-pooling and fully-connected dropout)} dans le MC Dropout Test.
+\subsection{Résultats du MC Dropout test}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_15}
+	\caption[Score du MC Dropout test et précisions de chaque classe]{Score du MC Dropout test et précisions de chaque classe}
+	\label{fig:figure_3_15}
+\end{figure}
+On peut voir que le modèle a atteint une précision moyenne de 77\% sur les données de test.\\[0.5\baselineskip]
+On peut aussi visualiser les résultats de précision de chaque classe qui varient entre un minimum de 63\% pour la classe « dog » et un maximum de 95\% pour la classe « ship ».
+\newpage
+\subsection{Résultats d'incertitude du modèle}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_16}
+	\caption[Pourcentage d'incertitude des différentes classes]{Pourcentage d'incertitude des différentes classes}
+	\label{fig:figure_3_16}
+\end{figure}
+On peut bien voir que l'incertitude de chaque classe ne dépasse pas les 11.9\%, et possède un taux minimal de 8.9\%.\\[0.5\baselineskip]
+Ces résultats peuvent être très utiles lors de la prise de décision car on peut améliorer les résultats d'incertitude d'une classe donnée en prévoyant par exemple plus de données en entrée pour celle-ci pour permettre au modèle de faire de bonnes prédictions, chose qui va nous permettre d'aboutir à un gain de temps énorme, élément essentiel dans tout problème de prise de décision.\\[0.5\baselineskip]
+\section{Réalisation de l'application}
+En raison d'absence du matériel assez puissant, nous avons réduit quelques paramètres de notre modèle afin d'accélérer le processus.\\[0.5\baselineskip]
+Nous avons utilisé deux couches de convolution composées de 6 filtres chacun de taille 5x5, deux couches de max pooling de taille 2x2, trois couches entièrement connectées : La 1ere couche entièrement connectée utilise une fonction d'activation Relu et elle est composée de 120 neurones, la 2 ème utilise également une fonction d'activation Relu et est connectée à la couche précédente avec 84 neurones et la 3 ème couche connectées est liée aux 84 sorties de la couche précédente pour pouvoir à la fin, générer 10 outputs.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_17}
+	\caption[Architecture du réseau utilisé faite  à l'aide de l'outil : alexlenail.me]{Architecture du réseau utilisé faite  à l'aide de l'outil : \textbf{alexlenail.me}}
+	\label{fig:figure_3_17}
+\end{figure}
+Nous avons tenu à introduire notre réseau de neurones profond bayésien dans une interface graphique afin de pouvoir visualiser les performances facilement sans être obligé de passer à chaque fois par les lignes de codes. Les détails de l'interface sont montrés dans la figure suivante:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_18}
+	\caption[L'interface de l'application]{L'interface de l'application}
+	\label{fig:figure_3_18}
+\end{figure}
+\newpage
+\begin{itemize}
+	\item[\ding{228}] Dataset: un petit aperçu sur la data set utilisée.
+	Il est très important de visualiser nos données avant l'entrainement. Elles peuvent donner un aperçu des raisons pour lesquelles le modèle ne se comporte pas comme prévu. Il peut y avoir des situations où les données du modèle appartiennent entièrement ou principalement à une classe, c'est-à-dire des situations où le modèle est biaisé. Cela est principalement dû à un ensemble de données déséquilibré. Ainsi qu'au problème de manque de données pour renforcer l'énoncé du problème \cite{web26}.
+\end{itemize}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_19}
+	\caption[Affichage d'un ensemble aléatoire des images d'entrainement]{Affichage d'un ensemble aléatoire des images d'entrainement}
+	\label{fig:figure_3_19}
+\end{figure}
+\newpage
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_20}
+	\caption[distribution des images d'entrainement par classe]{distribution des images d'entrainement par classe}
+	\label{fig:figure_3_20}
+\end{figure}
+\begin{itemize}
+	\item[\ding{228}] train: lancement de l'apprentissage (affichage de la perte et de la précision)
+\end{itemize}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_21}
+	\caption[La phase d'entrainement]{La phase d'entrainement}
+	\label{fig:figure_3_21}
+\end{figure}
+\newpage
+\begin{itemize}
+	\item[\ding{228}] Graph : visualisation graphique de précision et de perte pendant la phase d'entrainement.
+\end{itemize}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./image_chapitre3/figure_22}
+	\caption[La précision et la perte durant la phase d'entrainement]{La précision et la perte durant la phase d'entrainement}
+	\label{fig:figure_3_22}
+\end{figure}
+\newpage
+\begin{itemize}
+	\item[\ding{228}] Test : lancement du test MC Dropout (affichage de la précision et d'incertitude pour chaque classe).
+\end{itemize}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{./image_chapitre3/figure_23}
+	\caption[La précision de chaque classe durant la phase du test : Application]{La précision de chaque classe durant la phase du test : Application}
+	\label{fig:figure_3_23}
+\end{figure}
+\newpage
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{./image_chapitre3/figure_24}
+	\caption[Pourcentage d'incertitude de différentes classes : Application]{Pourcentage d'incertitude de différentes classes : Application}
+	\label{fig:figure_3_24}
+\end{figure}
+
+\indent Le code source de l'application et du rapport de mémoire rédigé en Latex sont disponibles dans le dépôt distant (Github) suivant :\\
+\url{https://github.com/merahsamia/PFE_BayesianDeepNetworksForBigDataMining}
+\section{conclusion}
+Dans ce chapitre nous avons présenté les différentes expérimentations ainsi que notre méthodologie d'exécution et les différentes architectures des modèles utilisés, avant de présenter les résultats obtenus. Enfin, nous avons montré l'intégration de ces résultats dans notre application à travers une interface utilisateur.
+
+
+
+
+
